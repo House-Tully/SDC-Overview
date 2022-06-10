@@ -6,7 +6,11 @@
 
 -- sudo service postgresql start;
 
+-- sudo service postgresql restart;
+
 -- sudo -i -u postgres;
+
+-- psql -d products -f /home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/schema.sql
 
 -- ---
 -- Create and use database
@@ -30,10 +34,10 @@ CREATE DATABASE products;
 --
 -- ---
 
-DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS product;
 
-CREATE TABLE products (
-  id INTEGER,
+CREATE TABLE product (
+  id SERIAL NOT NULL,
   name VARCHAR(250) NOT NULL,
   slogan VARCHAR(500) NOT NULL,
   description VARCHAR(2000) NOT NULL,
@@ -50,10 +54,10 @@ CREATE TABLE products (
 DROP TABLE IF EXISTS styles;
 
 CREATE TABLE styles (
-  id INTEGER,
-  product_id INTEGER NOT NULL REFERENCES products (id),
+  id SERIAL,
+  productId INTEGER NOT NULL,
   name VARCHAR(100) NOT NULL,
-  sale_price INT NULL,
+  sale_price DECIMAL(12,2) DEFAULT 0,
   original_price INTEGER NOT NULL,
   default_style BOOLEAN NOT NULL DEFAULT false,
   PRIMARY KEY (id)
@@ -67,8 +71,8 @@ CREATE TABLE styles (
 DROP TABLE IF EXISTS features;
 
 CREATE TABLE features (
-  id INTEGER,
-  product_id INTEGER NOT NULL REFERENCES products (id),
+  id SERIAL NOT NULL,
+  product_id INTEGER NOT NULL,
   feature VARCHAR(250) NOT NULL,
   value VARCHAR(250) NOT NULL,
   PRIMARY KEY (id)
@@ -79,51 +83,51 @@ CREATE TABLE features (
 --
 -- ---
 
-DROP TABLE IF EXISTS photos;
+-- DROP TABLE IF EXISTS photos;
 
-CREATE TABLE photos (
-  id INTEGER,
-  styleId INTEGER NOT NULL REFERENCES styles (id),
-  thumbnail_url VARCHAR NOT NULL,
-  url VARCHAR NOT NULL,
-  PRIMARY KEY (id)
-);
+-- CREATE TABLE photos (
+--   id INTEGER,
+--   styleId INTEGER NOT NULL REFERENCES styles (id),
+--   thumbnail_url VARCHAR NOT NULL,
+--   url VARCHAR NOT NULL,
+--   PRIMARY KEY (id)
+-- );
 
--- ---
--- Table 'skus'
---
--- ---
+-- -- ---
+-- -- Table 'skus'
+-- --
+-- -- ---
 
-DROP TABLE IF EXISTS skus;
+-- DROP TABLE IF EXISTS skus;
 
-CREATE TABLE skus (
-  id INTEGER,
-  styleId INTEGER NOT NULL REFERENCES styles (id),
-  size VARCHAR(50) NOT NULL,
-  quantity INTEGER NOT NULL DEFAULT 0,
-  PRIMARY KEY (id)
-);
+-- CREATE TABLE skus (
+--   id INTEGER,
+--   styleId INTEGER NOT NULL REFERENCES styles (id),
+--   size VARCHAR(50) NOT NULL,
+--   quantity INTEGER NOT NULL DEFAULT 0,
+--   PRIMARY KEY (id)
+-- );
 
--- ---
--- Table 'realated'
---
--- ---
+-- -- ---
+-- -- Table 'realated'
+-- --
+-- -- ---
 
-DROP TABLE IF EXISTS realated;
+-- DROP TABLE IF EXISTS realated;
 
-CREATE TABLE realated (
-  id INTEGER,
-  current_product_id INTEGER NOT NULL REFERENCES products (id),
-  related_product_id INTEGER NOT NULL,
-  PRIMARY KEY (id)
-);
+-- CREATE TABLE related (
+--   id INTEGER,
+--   current_product_id INTEGER NOT NULL REFERENCES products (id),
+--   related_product_id INTEGER NOT NULL,
+--   PRIMARY KEY (id)
+-- );
 
--- ---
--- Foreign Keys
--- ---
+-- -- ---
+-- -- Foreign Keys
+-- -- ---
 
--- ALTER TABLE styles ADD FOREIGN KEY (product_id) REFERENCES products (id);
--- ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES products (id);
+ALTER TABLE styles ADD FOREIGN KEY (productId) REFERENCES product (id);
+ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES product (id);
 -- ALTER TABLE photos ADD FOREIGN KEY (styleID) REFERENCES styles (id);
 -- ALTER TABLE skus ADD FOREIGN KEY (styleID) REFERENCES styles (id);
 -- ALTER TABLE realated ADD FOREIGN KEY (current_product_id) REFERENCES products (id);
@@ -148,26 +152,26 @@ CREATE TABLE realated (
 -- [ WHERE condition ]
 -- ---
 
-COPY products
+COPY product
 FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/product.csv'
 DELIMITER ',' CSV HEADER;
 
 COPY styles
 FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/styles.csv'
-DELIMITER ',' CSV HEADER;
+DELIMITER ',' NULL as 'null' CSV HEADER;
 
 COPY features
 FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/features.csv'
 DELIMITER ',' CSV HEADER;
 
-COPY photos
-FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/photos.csv'
-DELIMITER ',' CSV HEADER;
+-- COPY photos
+-- FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/photos.csv'
+-- DELIMITER ',' CSV HEADER;
 
-COPY skus
-FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/skus.csv'
-DELIMITER ',' CSV HEADER;
+-- COPY skus
+-- FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/skus.csv'
+-- DELIMITER ',' CSV HEADER;
 
-COPY related
-FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/related.csv'
-DELIMITER ',' CSV HEADER;
+-- COPY related
+-- FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/related.csv'
+-- DELIMITER ',' CSV HEADER;
