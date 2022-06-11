@@ -14,4 +14,5 @@ app.listen(port, ()=>{
 app.use(bodyParser.json());
 
 // routes
-app.get('/products', router)
+// app.get('/products', router)
+app.use('/products', router) // whats the diff?
