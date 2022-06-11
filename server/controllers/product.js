@@ -1,9 +1,9 @@
 var pool = require('../db/db.js');
 
 getProduct = function(req, res) {
-  console.log(res.body)
-  const query = `SELECT * FROM products WHERE id = 1;`//$1 represents the first element in the values array
-  pool.query(query)
+  console.log(res)
+  const query = `SELECT * FROM product WHERE id = $1;`//$1 represents the first element in the values array
+  pool.query(query, [1])
   .then((data) => {
     console.log(data)
     res.status(200).send(data.rows[0])
