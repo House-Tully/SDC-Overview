@@ -1,4 +1,4 @@
-to create and copy entire database execute this in terminal as postgres:
+to create and copy entire database execute this in terminal as postgres user:
 
 psql -d products -f /home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/schema/schema.sql;
 psql -d products -f /home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/schema/product.sql;
