@@ -20,7 +20,7 @@ getProduct = function(req, res) {
     res.status(200).send(data.rows[0])
   })
   .catch((err) => {
-    res.status(401).send('could not get product')
+    res.status(400).send('could not get product')
   })
 }
 
