@@ -8,7 +8,7 @@ const controllers = require('../controllers/index.js');
 //   next();
 // });
 
-router.get('/', controllers.getProducts)
+router.get('', controllers.getProducts)
 
 router.get('/:product_id', controllers.getProduct)
 
