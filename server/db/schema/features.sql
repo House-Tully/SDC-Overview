@@ -14,6 +14,6 @@ CREATE TABLE features (
   PRIMARY KEY (id)
 );
 
-CREATE INDEX features_product_id_index ON features (product_id);
-
 ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES product (id);
+
+CREATE INDEX features_product_id_index ON features (product_id);

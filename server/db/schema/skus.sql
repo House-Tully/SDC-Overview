@@ -15,6 +15,6 @@ CREATE TABLE skus (
   PRIMARY KEY (id)
 );
 
-CREATE INDEX skus_styleId_index ON skus (styleId);
-
 ALTER TABLE skus ADD FOREIGN KEY (styleID) REFERENCES styles (id);
+
+CREATE INDEX skus_styleId_index ON skus (styleId);

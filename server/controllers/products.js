@@ -1,8 +1,8 @@
 var pool = require('../db/db.js');
 
 getProducts = function(req, res) {
-  const count = req.query.count || 5;
-  const page = ((req.query.page - 1) * count) || 0;
+  let count = req.query.count || 5;
+  let page = ((req.query.page - 1) * count) || 0;
   console.log(`request url:: http://localhost:8080/products?page=${page}&count=${count}`)
   const query = {
     text:`
@@ -17,6 +17,7 @@ getProducts = function(req, res) {
     res.status(200).send(data.rows)
   })
   .catch((err) => {
+    console.log(err)
     res.status(401).send('could not get products')
   })
 }
