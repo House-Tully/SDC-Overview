@@ -2,8 +2,9 @@
 -- -- Table 'skus'
 -- --
 -- -- ---
--- -- psql -d products -f /home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/schema/skus.sql
-
+-- psql -d products -f /home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/schema/skus.sql
+-- id,styleId,size,quantity
+-- 1,1,"XS",8
 DROP TABLE IF EXISTS skus;
 
 CREATE TABLE skus (
