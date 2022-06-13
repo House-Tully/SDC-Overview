@@ -1,6 +1,7 @@
-require('dotenv').config()
-const {Pool} = require("pg")
-
+require('dotenv').config();
+const fs = require('fs');
+const {Pool} = require("pg");
+// const schema = fs.readFileSync('/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/schema.sql').toString();
 //import credentials from .env
 const credentials = {
   user: process.env.DATABASE_USER,
@@ -14,6 +15,8 @@ const pool = new Pool(credentials)
 
 //connect
 pool.connect();
+
+// pool.query(schema)
 
 // Simple query to confirm connection
 // should console log the current time (GMT)
