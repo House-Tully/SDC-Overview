@@ -19,7 +19,6 @@ CREATE TABLE photos (
   PRIMARY KEY (id)
 );
 
-CREATE INDEX photos_id_index ON photos (id);
 CREATE INDEX photos_styleId_index ON photos (styleId);
 
 ALTER TABLE photos ADD FOREIGN KEY (styleID) REFERENCES styles (id);

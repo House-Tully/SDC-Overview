@@ -4,8 +4,9 @@ getStyles = function(req, res) {
   console.log(`request url:: http://localhost:8080/products/:product_id=${req.params.product_id}/styles`)
   const query = {
     text:`
-    SELECT productId,
-    (SELECT json_agg(
+    SELECT json_build_object(
+    'product_id', $1::int,
+    'results', (SELECT json_agg(
       json_build_object(
         'style_id', id,
         'name', name,
@@ -16,22 +17,21 @@ getStyles = function(req, res) {
           json_build_object(
             'thumbnail_url', thumbnail_url,
             'url', url
-        ))FROM photos WHERE styleId = $1),
+        ))FROM photos WHERE styleId = styles.id),
         'skus', (SELECT json_object_agg(
-          styleId, json_build_object(
+          skus.id, json_build_object(
             'quantity', quantity,
             'size', size
-        ))FROM skus WHERE styleId = $1)
-      ))AS results FROM styles
-      WHERE productId = $1)
-    FROM styles WHERE id = $1;
+        ))FROM skus WHERE styleId = styles.id)
+      ))FROM styles WHERE productId = $1)
+    )data
     `,
 
     values: [req.params.product_id]
   }
   pool.query(query)
   .then((data) => {
-    res.status(200).send(data.rows)
+    res.status(200).send(data.rows[0].data)
   })
   .catch((err) => {
     console.log(err)

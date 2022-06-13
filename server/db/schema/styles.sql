@@ -16,4 +16,6 @@ CREATE TABLE styles (
   PRIMARY KEY (id)
 );
 
+CREATE INDEX styles_productId_index ON styles (ProductId);
+
 ALTER TABLE styles ADD FOREIGN KEY (productId) REFERENCES product (id);
