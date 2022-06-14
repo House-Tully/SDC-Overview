@@ -6,13 +6,17 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "test": "mocha --reporter spec"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
+    "chai": "^4.3.6",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
-    "pg": "^8.7.3"
+    "mocha": "^10.0.0",
+    "pg": "^8.7.3",
+    "request": "^2.88.2"
   }
 }

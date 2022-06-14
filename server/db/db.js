@@ -4,10 +4,11 @@ const {Pool} = require("pg");
 // const schema = fs.readFileSync('/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/schema.sql').toString();
 //import credentials from .env
 const credentials = {
-  user: process.env.DATABASE_USER,
-  database: process.env.DATABASE_NAME,
-  password: process.env.DATABASE_PASSWORD,
-  port: process.env.DATABASE_PORT,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  password: process.env.PG_PASSWORD,
+  database: "products",
+  port: process.env.PG_PORT,
 };
 
 // create database connection

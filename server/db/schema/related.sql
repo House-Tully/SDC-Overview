@@ -13,6 +13,6 @@ CREATE TABLE related (
   PRIMARY KEY (id)
 );
 
-CREATE INDEX current_product_id_index ON related (current_product_id);
-
 ALTER TABLE related ADD FOREIGN KEY (current_product_id) REFERENCES product (id);
+
+CREATE INDEX current_product_id_index ON related (current_product_id);
