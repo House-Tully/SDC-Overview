@@ -7,7 +7,6 @@ const router = require('./routes/routes.js');
 
 const port = process.env.API_PORT;
 const loader_io = process.env.LOADER_IO;
-const test_url = `${port}/${loader_io}/`;
 
 app.listen(port, ()=>{
     console.log(`Sever is now listening at port: ${port}`);
@@ -17,7 +16,6 @@ app.listen(port, ()=>{
 app.use(bodyParser.json());
 
 // routes
-// app.get('/products', router)
 
 app.get(`/${loader_io}`, (req, res) => {
   res.send(`${loader_io}`)
