@@ -1,7 +1,6 @@
 var pool = require('../db/db.js');
 
 getStyles = function(req, res) {
-  console.log(`request url:: http://localhost:8080/products/:product_id=${req.params.product_id}/styles`)
   const query = {
     text:`
     SELECT json_build_object(
@@ -24,9 +23,8 @@ getStyles = function(req, res) {
             'size', size
         ))FROM skus WHERE styleId = styles.id)
       ))FROM styles WHERE productId = $1)
-    )data
+    )AS data
     `,
-
     values: [req.params.product_id]
   }
   pool.query(query)
