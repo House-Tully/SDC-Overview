@@ -49,61 +49,55 @@ DROP INDEX If EXISTS photos_styleId_index;
 DROP INDEX If EXISTS skus_styleId_index;
 
 CREATE TABLE product (
-  id SERIAL NOT NULL,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(250) NOT NULL,
   slogan VARCHAR(500) NOT NULL,
   description VARCHAR(2000) NOT NULL,
   category VARCHAR(100) NOT NULL,
-  default_price DECIMAL NOT NULL,
-  PRIMARY KEY (id)
+  default_price DECIMAL NOT NULL
 );
 
 CREATE TABLE features (
-  id SERIAL NOT NULL,
-  product_id INTEGER NOT NULL,
+  id SERIAL PRIMARY KEY,
+  product_id INT REFERENCES product(id),
   feature VARCHAR(250) NOT NULL,
-  value VARCHAR(250) NOT NULL,
-  PRIMARY KEY (id)
+  value VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE styles (
-  id SERIAL,
-  productId INTEGER NOT NULL,
+  id SERIAL PRIMARY KEY,
+  productId INT REFERENCES product(id),
   name VARCHAR(100) NOT NULL,
   sale_price VARCHAR(20),
   original_price VARCHAR(30) NOT NULL,
-  default_style BOOLEAN NOT NULL DEFAULT false,
-  PRIMARY KEY (id)
+  default_style BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE photos (
-  id SERIAL,
-  styleId INTEGER NOT NULL,
+  id SERIAL PRIMARY KEY,
+  styleId INT REFERENCES styles(id),
   thumbnail_url VARCHAR NOT NULL,
-  url VARCHAR NOT NULL,
-  PRIMARY KEY (id)
+  url VARCHAR NOT NULL
 );
 
 CREATE TABLE skus (
-  id INTEGER,
-  styleId INTEGER NOT NULL REFERENCES styles (id),
+  id SERIAL PRIMARY KEY,
+  styleId INT REFERENCES styles(id),
   size VARCHAR(50) NOT NULL,
-  quantity INTEGER NOT NULL DEFAULT 0,
-  PRIMARY KEY (id)
+  quantity INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE related (
-  id INTEGER,
+  id SERIAL PRIMARY KEY,
   current_product_id INTEGER NOT NULL,
-  related_product_id INTEGER NOT NULL,
-  PRIMARY KEY (id)
+  related_product_id INTEGER NOT NULL
 );
 
-ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES product (id);
-ALTER TABLE styles ADD FOREIGN KEY (productId) REFERENCES product (id);
-ALTER TABLE photos ADD FOREIGN KEY (styleID) REFERENCES styles (id);
-ALTER TABLE skus ADD FOREIGN KEY (styleID) REFERENCES styles (id);
-ALTER TABLE related ADD FOREIGN KEY (current_product_id) REFERENCES product (id);
+-- ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES product (id);
+-- ALTER TABLE styles ADD FOREIGN KEY (productId) REFERENCES product (id);
+-- ALTER TABLE photos ADD FOREIGN KEY (styleID) REFERENCES styles (id);
+-- ALTER TABLE skus ADD FOREIGN KEY (styleID) REFERENCES styles (id);
+-- ALTER TABLE related ADD FOREIGN KEY (current_product_id) REFERENCES product (id);
 
 COPY product
 FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/product.csv'
@@ -129,11 +123,11 @@ COPY related
 FROM '/home/dincohen92/hackreactor/rfp2204/SDC-Overview/server/db/products-data/related.csv'
 DELIMITER ',' CSV HEADER;
 
-CREATE INDEX features_product_id_index ON features (product_id);
-CREATE INDEX styles_productId_index ON styles (ProductId);
-CREATE INDEX current_product_id_index ON related (current_product_id);
-CREATE INDEX photos_styleId_index ON photos (styleId);
-CREATE INDEX skus_styleId_index ON skus (styleId);
+-- CREATE INDEX features_product_id_index ON features (product_id);
+-- CREATE INDEX styles_productId_index ON styles (ProductId);
+-- CREATE INDEX current_product_id_index ON related (current_product_id);
+-- CREATE INDEX photos_styleId_index ON photos (styleId);
+-- CREATE INDEX skus_styleId_index ON skus (styleId);
 
 -- ---
 -- copy data from .csv files to database

@@ -22,8 +22,8 @@ getStyles = function(req, res) {
             'quantity', quantity,
             'size', size
         ))FROM skus WHERE styleId = styles.id)
-      ))FROM styles WHERE productId = $1)
-    )AS data
+      ))FROM styles WHERE productId = $1::int)
+    )AS data;
     `,
     values: [req.params.product_id]
   }

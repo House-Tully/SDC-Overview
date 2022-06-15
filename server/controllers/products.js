@@ -3,7 +3,6 @@ var pool = require('../db/db.js');
 getProducts = function(req, res) {
   let count = parseInt(req.query.count) || 5;
   let page = parseInt(req.query.page) || 1;
-  console.log(`request url:: http://localhost:8080/products?page=${page}&count=${count}`)
   const query = {
     text:`
     SELECT id, name, slogan, description, category, default_price

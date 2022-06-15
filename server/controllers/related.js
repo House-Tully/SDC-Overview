@@ -1,7 +1,6 @@
 var pool = require('../db/db.js');
 
 getRelated = function(req, res) {
-  console.log(`request url:: http://localhost:8080/products/product_id=${req.params.product_id}/related`)
   const query = {
     text:`
     SELECT json_agg(

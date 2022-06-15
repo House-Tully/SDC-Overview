@@ -5,12 +5,12 @@ require('dotenv').config();
 const app = express();
 const router = require('./routes/routes.js');
 
+const url = process.env.API_URL;
 const port = process.env.API_PORT;
 const loader_io = process.env.LOADER_IO;
 
 app.listen(port, ()=>{
-    console.log(`Sever is now listening at port: ${port}`);
-    console.log(`http://localhost:${port}`)
+    console.log(`http://${url}:${port}`)
 })
 
 app.use(bodyParser.json());
