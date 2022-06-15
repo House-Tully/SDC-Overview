@@ -10,8 +10,8 @@ CREATE TABLE styles (
   id SERIAL,
   productId INTEGER NOT NULL,
   name VARCHAR(100) NOT NULL,
-  sale_price DECIMAL(12,2) DEFAULT 0,
-  original_price INTEGER NOT NULL,
+  sale_price VARCHAR(20),
+  original_price VARCHAR(30) NOT NULL,
   default_style BOOLEAN NOT NULL DEFAULT false,
   PRIMARY KEY (id)
 );
