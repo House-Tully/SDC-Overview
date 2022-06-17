@@ -19,7 +19,7 @@ pool.connect();
 //Simple now() query to confirm connection
 pool.query('SELECT now()')
   .then((res) => {
-    console.log(`connected to database ${process.env.DATABASE_NAME} as ${process.env.DATABASE_USER} at ${res.rows[0].now}`)
+    console.log(`connected to database products as ${process.env.DATABASE_USER} at ${res.rows[0].now}`)
   })
   .catch((err) => {
     console.log("error connecting to DB")

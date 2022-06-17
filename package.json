@@ -6,8 +6,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "server-dev": "nodemon server/index.js",
-    "db-dev": "node server/db/db.js"
+    "start": "nodemon server/index.js"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
