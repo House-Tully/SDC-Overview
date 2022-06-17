@@ -10,15 +10,16 @@ const port = process.env.API_PORT;
 const loader_io = process.env.LOADER_IO;
 
 app.listen(port, ()=>{
-    console.log(`http://${url}:${port}`)
+    console.log(`listening on port ${port}`)
 })
 
 app.use(bodyParser.json());
 
 // routes
 
+//loader.io verification
 app.get(`/${loader_io}`, (req, res) => {
   res.send(`${loader_io}`)
 })
 
-app.use(`/products`, router) // whats the diff?
+app.use(`/products`, router)

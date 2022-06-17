@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "nodemon server",
-    "test": "mocha --reporter spec"
+    "server-dev": "nodemon server/index.js",
+    "db-dev": "node server/db/db.js"
   },
   "dependencies": {
     "body-parser": "^1.20.0",

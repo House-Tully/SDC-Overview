@@ -16,11 +16,10 @@ const pool = new Pool(credentials)
 //connect
 pool.connect();
 
-// Simple query to confirm connection
-// should console log the current time (GMT)
+//Simple now() query to confirm connection
 pool.query('SELECT now()')
   .then((res) => {
-    console.log(`connected to database ${process.env.DATABASE_NAME} as ${process.env.DATABASE_USER}`)
+    console.log(`connected to database ${process.env.DATABASE_NAME} as ${process.env.DATABASE_USER} at ${res.rows[0].now}`)
   })
   .catch((err) => {
     console.log("error connecting to DB")
