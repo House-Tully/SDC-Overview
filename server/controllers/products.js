@@ -5,7 +5,7 @@ getProducts = function(req, res) {
   let page = parseInt(req.query.page) || 1;
   const query = {
     text:`
-    SELECT id, name, slogan, description, category, default_price
+    SELECT *
     FROM product
     WHERE id > $1
     ORDER BY id
