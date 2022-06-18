@@ -7,8 +7,9 @@ getProducts = function(req, res) {
     text:`
     SELECT id, name, slogan, description, category, default_price
     FROM product
+    WHERE id > $1
     ORDER BY id
-    LIMIT $2 OFFSET $1;
+    LIMIT $2;
     `,
     values: [((page * count) - count), count]
   }
